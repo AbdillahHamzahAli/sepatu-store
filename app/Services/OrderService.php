@@ -41,6 +41,11 @@ class OrderService
         $this->orderRepository->saveToSession($orderData);
     }
 
+    public function getMyOrderDetails(array $validated)
+    {
+        return $this->orderRepository->findByTrxIdAndPhoneNumber($validated['booking_trx_id'], $validated['phone']);
+    }
+
     public function getOrderDetails()
     {
         $orderData = $this->orderRepository->getOrderDataFromSession();
@@ -92,10 +97,10 @@ class OrderService
     {
         $orderData = $this->orderRepository->getOrderDataFromSession();
 
-        $productTrasactionId = null;
+        $productTransactionId = null;
 
         try {
-            DB::transaction(function() use ($validated, &$productTrasactionId, $orderData){
+            DB::transaction(function() use ($validated, &$productTransactionId, $orderData){
                 if(isset($validated['proof'])){
                     $proofPath = $validated['proof']->store('proof', 'public'); // Alamat Image
                     $validated['proof'] = $proofPath;
@@ -110,7 +115,7 @@ class OrderService
                 $validated['quantity'] = $orderData['quantity'];
                 $validated['sub_total_amount'] = $orderData['sub_total_amount'];
                 $validated['grand_total_amount'] = $orderData['grand_total_amount'];
-                $validated['discount_amount'] = $orderData['discount_amount'];
+                $validated['discount_amount'] = $orderData['total_discount_amount'];
 
                 $validated['promo_code_id'] = $orderData['promo_code_id'];
                 $validated['shoe_id'] = $orderData['shoe_id'];
@@ -120,7 +125,9 @@ class OrderService
                 
                 $newTransaction = $this->orderRepository->createTransaction($validated);
 
-                $productTrasactionId = $newTransaction->id;
+                $productTransactionId = $newTransaction->id;
+
+                $this->orderRepository->clearSession();
             });
         } catch (\Exception $e) {
             Log::error('Error in payment confirmation: ' . $e->getMessage());
@@ -128,8 +135,9 @@ class OrderService
             return null;
         }
 
-        return $productTrasactionId;
+        return $productTransactionId;
     }
+
 }
 
 

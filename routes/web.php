@@ -6,9 +6,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 
+Route::get('/search', [FrontController::class, 'search'])->name('front.search');
+
 Route::get('/browse/{category:slug}', [FrontController::class, 'category'])->name('front.category');
 
-Route::get('/detail/{shoe:slug}', [FrontController::class, 'details'])->name('front.details');
+Route::get('/details/{shoe:slug}', [FrontController::class, 'details'])->name('front.details');
+
+Route::get('/check-booking', [OrderController::class, 'checkBooking'])->name('front.check_booking');
+Route::post('/check-booking', [OrderController::class, 'checkBookingDetails'])->name('front.check_booking_details');
 
 Route::post('/order/begin/{shoe:slug}', [OrderController::class, 'saveOrder'])->name('front.save_order');
 
@@ -20,5 +25,5 @@ Route::post('/order/booking/customer-data/save', [OrderController::class, 'saveC
 Route::get('/order/payment', [OrderController::class, 'payment'])->name('front.payment');
 Route::post('/order/payment/confirm', [OrderController::class, 'paymentConfirm'])->name('front.payment_confirm');
 
-Route::get('/order/finished/{productTracsaction:id}', [OrderController::class, 'orderFinished'])->name('front.order_finished');
+Route::get('/order/finished/{productTransaction:id}', [OrderController::class, 'orderFinished'])->name('front.order_finished');
 

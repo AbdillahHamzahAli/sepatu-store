@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePaymentRequest extends FormRequest
+class StoreCheckBookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class StorePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'proof' => ['required','image','mimes:jpg,jpeg,png','max:1024'],
+            'booking_trx_id' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
         ];
     }
 }
