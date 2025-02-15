@@ -38,6 +38,8 @@ class ShoeResource extends Resource
 
                         Forms\Components\FileUpload::make('thumbnail')
                         ->image()
+                        ->disk('s3')
+                        ->directory('shoes/thumbnails')
                         ->required(),
 
                         Forms\Components\Repeater::make('photos')
@@ -45,6 +47,8 @@ class ShoeResource extends Resource
                         ->schema([
                             Forms\Components\FileUpload::make('photo')
                             ->required()
+                            ->disk('s3')
+                            ->directory('shoes/photos')
                         ]),
 
                         Forms\Components\Repeater::make('sizes')
@@ -101,7 +105,8 @@ class ShoeResource extends Resource
 
                 Tables\Columns\TextColumn::make('category.name'),
 
-                Tables\Columns\ImageColumn::make('thumbnail'),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->disk('s3'),
 
                 Tables\Columns\IconColumn::make('is_popular')
                 ->boolean()

@@ -1,6 +1,6 @@
 <div>
     <div class="flex w-[260px] h-[160px] shrink-0 overflow-hidden mx-auto mb-10">
-        <img id="main-thumbnail" src="{{ Storage::url($shoe->photos()->latest()->first()->photo)}}" class="w-full h-full object-contain object-center" alt="thumbnail">
+        <img id="main-thumbnail" src="{{ Storage::disk('s3')->url($shoe->photos()->latest()->first()->photo)}}" class="w-full h-full object-contain object-center" alt="thumbnail">
     </div>
     <form wire:submit.prevent="submit" class="flex flex-col gap-5">
         <div class="flex flex-col rounded-[20px] p-4 mx-4 pb-5 gap-5 bg-white">

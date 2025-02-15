@@ -23,7 +23,7 @@
                 </label>
                 <div class="flex items-center gap-[14px]">
                     <div class="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] p-1 overflow-hidden">
-                        <img src="{{ Storage::url($orderDetails->shoe->photos()->latest()->first()->photo ) }}" class="w-full h-full object-contain" alt="">
+                        <img src="{{ Storage::disk('s3')->url($orderDetails->shoe->photos()->latest()->first()->photo ) }}" class="w-full h-full object-contain" alt="">
                     </div>
                     <h3 class="font-bold text-lg leading-6">{{ $orderDetails->shoe->name }}</h3>
                 </div>

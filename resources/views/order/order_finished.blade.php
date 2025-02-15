@@ -10,7 +10,7 @@
         <div class="relative flex flex-col w-full max-w-[640px] min-h-screen gap-5 mx-auto bg-[#F5F5F0]">
             <div class="flex flex-col items-center justify-center px-4 gap-[30px] my-auto">
                 <div class="w-[330px] h-[196px] flex overflow-hidden">
-                    <img src="{{ Storage::url($productTransaction->shoe->photos()->latest()->first()->photo) }}" class="w-full h-full object-contain" alt="thumbnail">
+                    <img src="{{ Storage::disk('s3')->url($productTransaction->shoe->photos()->latest()->first()->photo) }}" class="w-full h-full object-contain" alt="thumbnail">
                 </div>
                 <div class="flex flex-col w-full max-w-[340px] rounded-[20px] p-[20px_16px_30px_16px] gap-[30px] bg-white">
                     <div class="flex flex-col text-center gap-[10px]">

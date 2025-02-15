@@ -17,7 +17,7 @@
             </div>
             <div class="flex items-center rounded-3xl gap-[14px] p-[10px_16px_16px_10px] bg-white mx-4">
                 <div class="flex shrink-0 w-20 h-20 rounded-2xl p-1 bg-[#D9D9D9] overflow-hidden">
-                    <img src="{{ Storage::url($shoe->photos()->latest()->first()->photo)}}" class="w-full h-full object-contain" alt="">
+                    <img src="{{ Storage::disk('s3')->url($shoe->photos()->latest()->first()->photo)}}" class="w-full h-full object-contain" alt="">
                 </div>
                 <div class="flex flex-col w-full">
                     <h1 id="title" class="font-bold text-lg leading-6">{{ $shoe->name }}</h1>

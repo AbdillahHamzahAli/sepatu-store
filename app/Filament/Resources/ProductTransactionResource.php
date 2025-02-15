@@ -178,6 +178,9 @@ class ProductTransactionResource extends Resource
                             ->required(),
                         
                         Forms\Components\FileUpload::make('proof')
+                            ->disk('s3')
+                            ->directory('proof')
+                            ->visibility('public')
                             ->image()
                             ->required()
                     ])
@@ -192,7 +195,8 @@ class ProductTransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('shoe.thumbnail'),
+                Tables\Columns\ImageColumn::make('shoe.thumbnail')
+                    ->disk('s3'),
 
                 Tables\Columns\TextColumn::make('name')
                 ->searchable(),

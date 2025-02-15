@@ -29,6 +29,9 @@ class BrandResource extends Resource
                     
                 Forms\Components\FileUpload::make('logo')
                     ->image()
+                    ->disk('s3')
+                    ->directory('brands')
+                    ->visibility('public')
                     ->required(),
             ]);
     }
@@ -40,6 +43,8 @@ class BrandResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('logo')
+                    ->disk('s3')
+                    ->visibility('public'),
             ])
             ->filters([
                 //

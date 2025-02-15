@@ -30,6 +30,8 @@ class CategoryResource extends Resource
 
                 Forms\Components\FileUpload::make('icon')
                     ->image()
+                    ->disk('s3')
+                    ->directory('categories')
                     ->required(),
             ]);
     }
@@ -41,6 +43,7 @@ class CategoryResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('icon')
+                    ->disk('s3')
                     ->circular(),
             ])
             ->filters([

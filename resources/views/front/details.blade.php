@@ -18,7 +18,7 @@
             </div>
             <section id="gallery" class="flex flex-col gap-[10px]">
                 <div class="flex w-full h-[250px] shrink-0 overflow-hidden px-4">
-                    <img id="main-thumbnail" src="{{ Storage::url($shoe->photos()->latest()->first()->photo) }}" class="w-full h-full object-contain object-center" alt="thumbnail">
+                    <img id="main-thumbnail" src="{{ Storage::disk('s3')->url($shoe->photos()->latest()->first()->photo) }}" class="w-full h-full object-contain object-center" alt="thumbnail">
                 </div>
                 <div class="swiper w-full overflow-hidden">
                     <div class="swiper-wrapper">
@@ -26,7 +26,7 @@
                             <div class="swiper-slide !w-fit py-[2px]">
                                 <label class="thumbnail-selector flex flex-col shrink-0 w-20 h-20 rounded-[20px] p-[10px] bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700] has-[:checked]:ring-2 has-[:checked]:ring-[#FFC700]">
                                     <input type="radio" name="image" class="hidden" checked>
-                                    <img src="{{ Storage::url($itemPhoto->photo) }}" class="w-full h-full object-contain" alt="thumbnail">
+                                    <img src="{{ Storage::disk('s3')->url($itemPhoto->photo) }}" class="w-full h-full object-contain" alt="thumbnail">
                                 </label>
                             </div>                            
                         @endforeach
@@ -48,7 +48,7 @@
             </section>
             <div id="brand" class="flex items-center gap-4 px-4">
                 <div class="w-[70px] h-[70px] rounded-[20px] bg-white overflow-hidden">
-                    <img src="{{ Storage::url($shoe->brand->logo) }}" class="w-full h-full object-contain" alt="brand logo">
+                    <img src="{{ Storage::disk('s3')->url($shoe->brand->logo) }}" class="w-full h-full object-contain" alt="brand logo">
                 </div>
                 <div class="flex flex-col">
                     <h2 class="text-sm leading-[21px]">Brand</h2>

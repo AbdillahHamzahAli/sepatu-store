@@ -102,9 +102,8 @@ class OrderService
         try {
             DB::transaction(function() use ($validated, &$productTransactionId, $orderData){
                 if(isset($validated['proof'])){
-                    $proofPath = $validated['proof']->store('proof', 'public'); // Alamat Image
-                    $validated['proof'] = $proofPath;
-                }
+                    $proofPath = $validated['proof']->store('proof', 's3'); // Alamat Image
+                    $validated['proof'] = $proofPath;                }
 
                 $validated['name'] = $orderData['name'];
                 $validated['email'] = $orderData['email'];

@@ -27,7 +27,7 @@
             <section id="category" class="flex flex-col gap-4 px-4">
                 <div class="flex items-center justify-between">
                     <h2 class="font-bold leading-[20px]">Our Featured <br>Categories</h2>
-                    <a href="category.html" class="rounded-full p-[6px_14px] border border-[#2A2A2A] text-xs leading-[18px]">
+                    <a href="#" class="rounded-full p-[6px_14px] border border-[#2A2A2A] text-xs leading-[18px]">
                         View All
                     </a>
                 </div>
@@ -40,7 +40,7 @@
                                     <p class="text-xs leading-[18px] text-[#878785]">{{  $itemCategory->shoes->count() }} Shoes</p>
                                 </div>
                                 <div class="flex shrink-0 w-20 h-[90px] overflow-hidden">
-                                    <img src="{{ Storage::url($itemCategory->icon) }}" class="w-full h-full object-cover object-left" alt="thumbnail">
+                                    <img src="{{ Storage::disk('s3')->url($itemCategory->icon) }}" class="w-full h-full object-cover object-left" alt="thumbnail">
                                 </div>
                             </div>
                         </a>
@@ -63,7 +63,7 @@
                                 <a href="{{ route('front.details', $itemPopularShoes->slug) }}">
                                     <div class="flex flex-col shrink-0 w-[230px] h-full rounded-3xl gap-[14px] p-[10px] pb-4 bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700]">
                                         <div class="w-[210px] h-[230px] rounded-3xl bg-[#D9D9D9] overflow-hidden">
-                                            <img src="{{ Storage::url($itemPopularShoes->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
+                                            <img src="{{ Storage::disk('s3')->url($itemPopularShoes->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
                                         </div>
                                         <div class="flex flex-col gap-[14px] justify-between">
                                             <div class="flex items-center justify-between gap-4">
@@ -99,7 +99,7 @@
                         <a href="{{ route('front.details', $itemNewShoes->slug) }}">
                             <div class="flex items-center rounded-3xl p-[10px_16px_16px_10px] gap-[14px] bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700]">
                                 <div class="w-20 h-20 flex shrink-0 rounded-2xl bg-[#D9D9D9] overflow-hidden">
-                                    <img src="{{ Storage::url($itemNewShoes->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
+                                    <img src="{{ Storage::disk('s3')->url($itemNewShoes->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
                                 </div>
                                 <div class="flex w-full items-center justify-between gap-[14px]">
                                     <div class="flex flex-col gap-[6px]">
