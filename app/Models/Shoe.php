@@ -51,4 +51,9 @@ class Shoe extends Model
         return $this->hasMany(ShoeSize::class);
     }
 
+    public function ratings() : HasMany
+    {
+        return $this->hasMany(ShoeRating::class);
+    }
+
 }
