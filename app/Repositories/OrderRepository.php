@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ProductTransaction;
+use App\Models\ShoeRating;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use Illuminate\Support\Facades\Session;
 
@@ -40,5 +41,10 @@ class OrderRepository implements OrderRepositoryInterface
     public function clearSession()
     {
         Session::forget('orderData');
+    }
+
+    public function saveShoeRating(array $data)
+    {
+        return ShoeRating::create($data);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCheckBookingRequest;
 use App\Http\Requests\StoreCustomerDataRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\StorePaymentRequest;
+use App\Http\Requests\StoreRatingRequest;
 use App\Models\ProductTransaction;
 use App\Models\Shoe;
 use App\Services\OrderService;
@@ -91,4 +92,18 @@ class OrderController extends Controller
         }
         return redirect()->route('front.index')->withErrors(['error' => 'Order not found']);
     }
-}
+    public function saveRating(StoreRatingRequest $request)
+    {
+        $validated = $request->validated();
+        $validated['product_transaction_id'] = $request->product_transaction_id;
+        $validated['shoe_id'] = $request->shoe_id;
+
+        $rating = $this->orderService->saveRating($validated);
+        
+        if (!$rating) {
+            return redirect()->route('front.index')->withErrors(['error' => 'Rating failed']);
+        }
+
+        return redirect()->route('front.check_booking')->with('success', 'Rating saved successfully');
+    }
+}   

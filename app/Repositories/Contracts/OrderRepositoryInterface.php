@@ -10,4 +10,5 @@ interface OrderRepositoryInterface
     public function updateSessionData(array $data);
     public function getOrderDataFromSession();
     public function clearSession();
+    public function saveShoeRating(array $data);
 }

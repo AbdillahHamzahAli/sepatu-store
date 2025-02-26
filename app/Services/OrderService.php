@@ -137,6 +137,10 @@ class OrderService
         return $productTransactionId;
     }
 
+    public function saveRating(array $data)
+    {
+        return $this->orderRepository->saveShoeRating($data);
+    }
 }
 
 

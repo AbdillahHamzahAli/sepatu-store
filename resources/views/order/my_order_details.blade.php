@@ -17,7 +17,7 @@
         id="top-bar"
         class="flex justify-between items-center px-4 mt-[60px]"
       >
-        <a href="check-booking.html">
+        <a href="{{ route('front.check_booking') }}">
           <img
             src="{{ asset('assets/images/icons/back.svg')}}"
             class="w-10 h-10"
@@ -170,12 +170,15 @@
           </div>
         </div>
         <hr class="border-[#EAEAED]" />
+        @if (!$orderDetails->rating)
         <button
-          onclick="showRatingModal()"
-          class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold"
-        >
-          Rate Your Experience
-        </button>
+        onclick="showRatingModal()"
+        class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold"
+      >
+        Rate Your Experience
+      </button>
+        @endif
+        
         <a
           href="#"
           class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold"
@@ -201,27 +204,31 @@
       class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center"
     >
       <div class="bg-white rounded-[20px] p-6 w-[90%] max-w-[400px]">
-        <form action="{{ route('front.rating') }}" method="POST" class="flex flex-col items-center gap-4">
+        <form action="{{ route('front.rating', ['shoe_id' => $orderDetails->shoe, 'product_transaction_id' => $orderDetails]) }}" method="POST" class="flex flex-col items-center gap-4" id="ratingForm">
           @csrf
           <h3 class="font-bold text-xl">Rate Your Experience</h3>
           <div class="flex gap-2">
-            <button type="button" class="star text-3xl text-gray-300 hover:text-yellow-400" data-value="1" onclick="setRating(1)">
-              ★
-            </button>
-            <button type="button" class="star text-3xl text-gray-300 hover:text-yellow-400" data-value="2" onclick="setRating(2)">
-              ★
-            </button>
-            <button type="button" class="star text-3xl text-gray-300 hover:text-yellow-400" data-value="3" onclick="setRating(3)">
-              ★
-            </button>
-            <button type="button" class="star text-3xl text-gray-300 hover:text-yellow-400" data-value="4" onclick="setRating(4)">
-              ★
-            </button>
-            <button type="button" class="star text-3xl text-gray-300 hover:text-yellow-400" data-value="5" onclick="setRating(5)">
-              ★
-            </button>
+            <label class="cursor-pointer">
+              <input type="radio" name="rating" value="1" class="hidden" required>
+              <span class="star text-3xl text-gray-300 hover:text-yellow-400">★</span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="rating" value="2" class="hidden" required>
+              <span class="star text-3xl text-gray-300 hover:text-yellow-400">★</span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="rating" value="3" class="hidden" required>
+              <span class="star text-3xl text-gray-300 hover:text-yellow-400">★</span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="rating" value="4" class="hidden" required>
+              <span class="star text-3xl text-gray-300 hover:text-yellow-400">★</span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="rating" value="5" class="hidden" required>
+              <span class="star text-3xl text-gray-300 hover:text-yellow-400">★</span>
+            </label>
           </div>
-          <input type="hidden" name="rating" id="ratingValue" value="0">
           <textarea
             name="comment"
             class="w-full p-3 border rounded-lg"
@@ -239,13 +246,14 @@
             <button
               type="submit"
               class="flex-1 py-2 px-4 rounded-full bg-[#C5F277]"
+              id="submitRating"
             >
               Submit
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </div>    
     <script src="{{ asset("js/accordion.js") }}"></script>
     <script src="{{ asset('js/rating.js') }}"></script>
   </body>

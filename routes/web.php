@@ -14,6 +14,7 @@ Route::get('/details/{shoe:slug}', [FrontController::class, 'details'])->name('f
 
 Route::get('/check-booking', [OrderController::class, 'checkBooking'])->name('front.check_booking');
 Route::post('/check-booking', [OrderController::class, 'checkBookingDetails'])->name('front.check_booking_details');
+Route::post('/order/booking/rating', [OrderController::class, 'saveRating'])->name('front.rating');
 
 Route::post('/order/begin/{shoe:slug}', [OrderController::class, 'saveOrder'])->name('front.save_order');
 

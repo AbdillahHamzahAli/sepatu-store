@@ -54,4 +54,9 @@ class ProductTransaction extends Model
     {
         return $this->belongsTo(PromoCode::class, 'promo_code_id');
     }
+
+    public function rating(): BelongsTo
+    {
+        return $this->belongsTo(ShoeRating::class,'id','product_transaction_id');
+    }
 }
